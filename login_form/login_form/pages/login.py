@@ -38,6 +38,6 @@ def login():
             "."
         ),
         rx.spacer(),
-        spacing="2",
+        spacing="1",
         style=auth_pages_stylesheet,
     )

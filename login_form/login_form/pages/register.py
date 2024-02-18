@@ -35,13 +35,13 @@ def register():
         render_submit_button(
             name="Create account!", event=RegisterState.void_event
         ),
-        *[rx.spacer() for _ in range(2)],
+        *[rx.spacer() for _ in range(1)],
         rx.text(
             "Already have an account? Click ",
             rx.link("here", href="/"),
             "."
         ),
         rx.spacer(),
-        spacing="2",
+        spacing="1",
         style=auth_pages_stylesheet,
     )
