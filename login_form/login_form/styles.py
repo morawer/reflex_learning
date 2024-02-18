@@ -10,10 +10,18 @@ general_stylesheet = {
 }
 
 input_stylesheet = {
-    **general_stylesheet
+    **general_stylesheet,
 }
 
 button_stylesheet = {
     **general_stylesheet,
     "height": "45px",
+}
+
+auth_pages_stylesheet = {
+    "width": "100%",
+    "height": "100vh",
+    "display": "flex",
+    "justify_content": "start",
+    "align_items": "center",
 }

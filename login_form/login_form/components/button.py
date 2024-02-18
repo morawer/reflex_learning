@@ -12,5 +12,5 @@ def render_submit_button(name: str, event: rx.State):
             width="100%",
         ),
         style=button_stylesheet,
-        padding="5rem 0rem",
+        padding="0.5rem 0rem",
     )
