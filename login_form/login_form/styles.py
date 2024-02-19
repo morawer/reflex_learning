@@ -2,7 +2,7 @@
 
 general_stylesheet = {
     "width": ["100%", "100%", "70%", "50%", "35%"],
-    "padding": ["0rem 2rem"],
+    "padding": ["0em 2em"],
     "transition": "all 550ms ease",
     "display": "flex",
     "justify_content": "center",
@@ -15,13 +15,12 @@ input_stylesheet = {
 
 button_stylesheet = {
     **general_stylesheet,
-    "height": "45px",
+    "height": "2em",
 }
 
 auth_pages_stylesheet = {
     "width": "100%",
     "height": "100vh",
     "display": "flex",
-    "justify_content": "start",
     "align_items": "center",
 }

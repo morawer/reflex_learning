@@ -9,8 +9,8 @@ def render_submit_button(name: str, event: rx.State):
             rx.text(name),
             color_scheme="green",
             on_click=event,
-            width="100%",
+            width="80%",
         ),
         style=button_stylesheet,
-        padding="0.5rem 0rem",
+        padding="1rem",
     )

@@ -12,6 +12,7 @@ def login():
             rx.icon("sun-moon"),
             width="100%",
             justify_content="end",
+            padding="1em"
         ),
         rx.spacer(),
         rx.heading(
@@ -21,11 +22,11 @@ def login():
         rx.text("Sign in bellow to access your acount"),
         rx.divider(width="15%"),
         render_input_field(
-            title="Email", is_password=False,
+            title="Email", icon="mail", is_password=False,
             value=LoginState.email, update=LoginState.update_email,
         ),
         render_input_field(
-            title="Password", is_password=True,
+            title="Password", icon="key-square", is_password=True,
             value=LoginState.password, update=LoginState.update_password,
         ),
         render_submit_button(

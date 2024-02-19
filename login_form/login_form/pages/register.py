@@ -12,6 +12,7 @@ def register():
             rx.icon("sun-moon"),
             width="100%",
             justify_content="end",
+            padding="1em"
         ),
         rx.spacer(),
         rx.heading(
@@ -21,19 +22,19 @@ def register():
         rx.text("Create an acount to get started"),
         rx.divider(width="15%"),
         render_input_field(
-            title="Username", is_password=False,
+            title="Username", icon="user", is_password=False,
             value=RegisterState.username, update=RegisterState.update_username,
         ),
         render_input_field(
-            title="Email", is_password=False,
+            title="Email", icon="mail", is_password=False,
             value=RegisterState.email, update=RegisterState.update_email,
         ),
         render_input_field(
-            title="Password", is_password=True,
+            title="Password", icon="key-square", is_password=True,
             value=RegisterState.password, update=RegisterState.update_password,
         ),
         render_submit_button(
-            name="Create account!", event=RegisterState.void_event
+            name="Create an account!", event=RegisterState.void_event
         ),
         *[rx.spacer() for _ in range(1)],
         rx.text(
