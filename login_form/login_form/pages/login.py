@@ -5,7 +5,7 @@ from login_form.components.button import render_submit_button
 from login_form.states import LoginState
 
 
-@rx.page(route="/")
+@rx.page(route="/", title="Welcome Back!")
 def login():
     return rx.vstack(
         rx.hstack(
