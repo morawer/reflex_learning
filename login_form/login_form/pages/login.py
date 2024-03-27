@@ -30,7 +30,7 @@ def login():
             value=LoginState.password, update=LoginState.update_password,
         ),
         render_submit_button(
-            name="Login!", event=LoginState.void_event
+            name="Login!", event=LoginState.print_variables
         ),
         *[rx.spacer() for _ in range(2)],
         rx.text(

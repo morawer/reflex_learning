@@ -9,6 +9,11 @@ class LoginState(State):
     email: str
     password: str
 
+    def print_variables(self):
+        print(self.email, self.password)
+        self.email = ""
+        self.password = ""
+
     def update_email(self, email):
         self.email = email
 
