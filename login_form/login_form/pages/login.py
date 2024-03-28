@@ -2,10 +2,10 @@ import reflex as rx
 from login_form.styles import auth_pages_stylesheet
 from login_form.components.input_field import render_input_field
 from login_form.components.button import render_submit_button
-from login_form.states import LoginState
+from login_form.states import LoginState, SayHello
 
 
-@rx.page(route="/", title="Welcome Back!")
+@rx.page(route="/", title="Welcome Back!", on_load=SayHello.say_hello)
 def login():
     return rx.vstack(
         rx.hstack(
@@ -15,6 +15,7 @@ def login():
             padding="1em"
         ),
         rx.spacer(),
+        rx.heading(SayHello.text),
         rx.heading(
             "Welcome Back!", size="9",
             transition="all 550ms ease"

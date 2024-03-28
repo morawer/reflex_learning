@@ -1,8 +1,16 @@
 import reflex as rx
+from login_form.api.api import hello
 
 
 class State(rx.State):
     def void_event(self): ...
+
+
+class SayHello(State):
+    text: str
+
+    async def say_hello(self):
+        self.text = await hello()
 
 
 class LoginState(State):
