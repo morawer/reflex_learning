@@ -1,4 +1,5 @@
 import reflex as rx
+from login_form.api.api import users, create_user
 
 
 class State(rx.State):
@@ -8,6 +9,7 @@ class State(rx.State):
 class LoginState(State):
     email: str
     password: str
+    test: str
 
     def print_variables(self):
         print(self.email, self.password)
@@ -19,6 +21,12 @@ class LoginState(State):
 
     def update_password(self, password):
         self.password = password
+
+    async def query_user(self):
+        self.test = await users()
+
+    async def make_user(self):
+        self.test = await create_user()
 
 
 class RegisterState(State):
