@@ -6,8 +6,12 @@ email: str
 password: str
 
 
-async def users():
-    return SUPABASE_API.query_users()
+async def all_users():
+    return SUPABASE_API.query_all_users()
+
+
+async def match_user(email):
+    return SUPABASE_API.query_single_user(email)
 
 
 async def create_user(email, password):

@@ -1,5 +1,5 @@
 import reflex as rx
-from login_form.api.api import users, create_user
+from login_form.api.api import all_users, create_user, match_user
 
 
 class State(rx.State):
@@ -22,8 +22,11 @@ class LoginState(State):
     def update_password(self, password):
         self.password = password
 
-    async def query_user(self):
-        self.test = await users()
+    async def query_all_users(self):
+        self.test = await all_users()
+
+    async def query_single_user(self, email):
+        self.test = await match_user(email)
 
     async def make_user(self, email, password):
         self.test = await create_user(email, password)

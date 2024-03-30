@@ -18,8 +18,13 @@ class SupabaseAPI:
             self.SUPABASE_URL, self.SUPABASE_KEY)
         print(self.supabase)
 
-    def query_users(self):
+    def query_all_users(self):
         response = self.supabase.table("login_table").select("*").execute()
+        print(response)
+
+    def query_single_user(self, email):
+        response = self.supabase.from_("login_table").select(
+            "email").eq("email", email).execute()
         print(response)
 
     def insert_user(self, email, password):
