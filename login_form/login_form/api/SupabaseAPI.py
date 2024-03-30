@@ -24,7 +24,7 @@ class SupabaseAPI:
 
     def query_single_user(self, email):
         response = self.supabase.from_("login_table").select(
-            "email").eq("email", email).execute()
+            "email", "password").eq("email", email).execute()
         print(response)
 
     def insert_user(self, email, password):
