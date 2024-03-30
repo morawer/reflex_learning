@@ -30,7 +30,10 @@ def login():
             value=LoginState.password, update=LoginState.update_password,
         ),
         render_submit_button(
-            name="Login!", event=LoginState.query_user()
+            name="Search the user", color="green", event=LoginState.query_user()
+        ),
+        render_submit_button(
+            name="Show a table of users", color="red", event=LoginState.query_user()
         ),
         *[rx.spacer() for _ in range(2)],
         rx.text(

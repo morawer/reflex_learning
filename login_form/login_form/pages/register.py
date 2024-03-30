@@ -34,7 +34,7 @@ def register():
             value=RegisterState.password, update=RegisterState.update_password,
         ),
         render_submit_button(
-            name="Create an account!", event=RegisterState.make_user(RegisterState.email, RegisterState.password)
+            name="Create an account!", color="green", event=RegisterState.make_user(RegisterState.email, RegisterState.password)
         ),
         *[rx.spacer() for _ in range(1)],
         rx.text(
