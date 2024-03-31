@@ -1,5 +1,6 @@
 import reflex as rx
 from login_form.api.api import all_users, create_user, match_user
+from login_form.model.Users import User
 
 
 class State(rx.State):
@@ -9,7 +10,7 @@ class State(rx.State):
 class LoginState(State):
     email: str
     password: str
-    test: str
+    users_info: list[User] = []
 
     def print_variables(self):
         print(self.email, self.password)
@@ -23,7 +24,7 @@ class LoginState(State):
         self.password = password
 
     async def query_all_users(self):
-        self.test = await all_users()
+        self.users_info = await all_users()
 
     async def query_single_user(self, email):
         self.test = await match_user(email)
