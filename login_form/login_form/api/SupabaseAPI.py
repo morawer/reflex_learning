@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
+from login_form.model.Users import User
 
 
 class SupabaseAPI:
@@ -20,7 +21,17 @@ class SupabaseAPI:
 
     def query_all_users(self):
         response = self.supabase.table("login_table").select("*").execute()
-        print(response)
+        users_data = []
+
+        if len(response.data) > 0:
+            for user in response.data:
+                users_data.append(
+                    User(
+                        email=user["email"],
+                        password=user["password"]
+                    )
+                )
+        return users_data
 
     def query_single_user(self, email):
         response = self.supabase.from_("login_table").select(
