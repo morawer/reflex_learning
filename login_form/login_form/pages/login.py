@@ -35,26 +35,32 @@ def login():
         render_submit_button(
             name="Show a table of users", color="red", event=LoginState.query_all_users()
         ),
+        render_submit_button(
+            name="Delete table", color="blue", event=LoginState.delete_table()
+        ),
         rx.cond(
             LoginState.users_info is not None,
-            rx.table.root(
-                rx.table.header(
-                    rx.table.row(
-                        rx.table.column_header_cell("Email"),
-                        rx.table.column_header_cell("Password"),
+            rx.container(
+                rx.table.root(
+                    rx.table.header(
+                        rx.table.row(
+                            rx.table.column_header_cell("Email"),
+                            rx.table.column_header_cell("Password"),
+                        ),
+                    ),
+                    rx.table.body(
+                        rx.foreach(
+                            LoginState.users_info,
+                            lambda item: rx.table.row(
+                                rx.table.cell(item.email),
+                                rx.table.cell(item.password),
+                            ),
+                        )
                     ),
                 ),
-                rx.table.body(
-                    rx.foreach(
-                        LoginState.users_info,
-                        lambda item: rx.table.row(
-                            rx.table.cell(item.email),
-                            rx.table.cell(item.password),
-                        ),
-                    )
-                ),
-            )
+            ),
         ),
+
         *[rx.spacer() for _ in range(2)],
         rx.text(
             "Don't have an account? Click ",

@@ -32,6 +32,9 @@ class LoginState(State):
     async def make_user(self, email, password):
         self.test = await create_user(email, password)
 
+    def delete_table(self):
+        self.users_info = []
+
 
 class RegisterState(State):
     username: str
