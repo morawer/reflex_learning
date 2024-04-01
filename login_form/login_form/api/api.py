@@ -11,7 +11,7 @@ async def all_users() -> list[User]:
     return SUPABASE_API.query_all_users()
 
 
-async def match_user(email):
+async def match_user(email) -> bool:
     return SUPABASE_API.query_single_user(email)
 
 
