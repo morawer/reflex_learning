@@ -32,7 +32,7 @@ def login():
         rx.dialog.root(
             rx.dialog.trigger(
                 render_submit_button(
-                    name="Search the user", color="green", event=LoginState.query_single_user(LoginState.email)
+                    name="Verify user", color="green", event=LoginState.query_single_user(LoginState.email, LoginState.password)
                 )
             ),
             rx.cond(

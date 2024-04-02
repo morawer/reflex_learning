@@ -33,9 +33,10 @@ class SupabaseAPI:
                 )
         return users_data
 
-    def query_single_user(self, email):
+    def query_single_user(self, email, password):
         response = self.supabase.from_("login_table").select(
-            "email", "password").eq("email", email).execute()
+            "email", "password").eq("email", email).eq("password", password).execute()
+        print(response.data)
         if len(response.data) > 0:
             return True
         else:

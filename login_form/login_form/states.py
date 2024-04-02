@@ -11,7 +11,7 @@ class LoginState(State):
     email: str
     password: str
     users_info: list[User] = []
-    user_exist: bool = False
+    user_exist: bool
 
     def print_variables(self):
         print(self.email, self.password)
@@ -27,8 +27,8 @@ class LoginState(State):
     async def query_all_users(self):
         self.users_info = await all_users()
 
-    async def query_single_user(self, email):
-        self.user_exist = await match_user(email)
+    async def query_single_user(self, email, password):
+        self.user_exist = await match_user(email, password)
 
     async def make_user(self, email, password):
         self.test = await create_user(email, password)
