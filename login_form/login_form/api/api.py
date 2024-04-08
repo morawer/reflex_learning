@@ -1,5 +1,6 @@
 from .SupabaseAPI import SupabaseAPI
 from login_form.model.Users import User
+from login_form.tools.bcrypt import hash_password
 
 SUPABASE_API = SupabaseAPI()
 
@@ -16,4 +17,5 @@ async def match_user(email, password) -> bool:
 
 
 async def create_user(email, password):
-    return SUPABASE_API.insert_user(email, password)
+    password_hashed = hash_password(password)
+    return SUPABASE_API.insert_user(email, password_hashed.decode("utf-8"))
