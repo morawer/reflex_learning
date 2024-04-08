@@ -1,6 +1,6 @@
 from .SupabaseAPI import SupabaseAPI
 from login_form.model.Users import User
-from login_form.tools.bcrypt import hash_password
+from login_form.tools.bcrypt import hash_password, verify_password
 
 SUPABASE_API = SupabaseAPI()
 

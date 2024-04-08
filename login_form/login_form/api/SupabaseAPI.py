@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from supabase import create_client, Client
 from login_form.model.Users import User
+from login_form.tools.bcrypt import verify_password
 
 
 class SupabaseAPI:
@@ -35,10 +36,13 @@ class SupabaseAPI:
 
     def query_single_user(self, email, password):
         response = self.supabase.from_("login_table").select(
-            "email", "password").eq("email", email).eq("password", password).execute()
-        print(response.data)
+            "email", "password").eq("email", email).execute()
         if len(response.data) > 0:
-            return True
+            for item in response.data:
+                hashed_password = item["password"]
+            hashed_password_bytes = hashed_password.encode("utf-8")
+            match_password = verify_password(password, hashed_password_bytes)
+            return match_password
         else:
             return False
 
