@@ -29,34 +29,6 @@ def login():
             title="Password", icon="key-square", is_password=True,
             value=LoginState.password, update=LoginState.update_password,
         ),
-        rx.dialog.root(
-            rx.dialog.trigger(
-                render_submit_button(
-                    name="Verify user", color="green", event=LoginState.query_single_user(LoginState.email, LoginState.password)
-                )
-            ),
-            rx.cond(
-                LoginState.user_exist,
-                rx.dialog.content(
-                    rx.dialog.title("EXISTEEEEEEE"),
-                    rx.dialog.description(
-                        "This is a dialog component. You can render anything you want in here.",
-                    ),
-                    rx.dialog.close(
-                        rx.button("Close Dialog", size="3"),
-                    ),
-                ),
-                rx.dialog.content(
-                    rx.dialog.title("NOOOOO EXISTEEEEEEE"),
-                    rx.dialog.description(
-                        "This is a dialog component. You can render anything you want in here.",
-                    ),
-                    rx.dialog.close(
-                        rx.button("Close Dialog", size="3"),
-                    ),
-                )
-            )
-        ),
 
         render_submit_button(
             name="Show a table of users", color="red", event=LoginState.query_all_users()

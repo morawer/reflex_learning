@@ -49,11 +49,7 @@ class SupabaseAPI:
     def insert_user(self, email, password, username):
         response = self.supabase.from_("login_table").select(
             "email").eq("email", email).execute()
-        print(response)
-        print(len(response.data))
 
         if len(response.data) < 1:
             response = self.supabase.table("login_table").insert(
                 {"email": email, "password": password, "username": username}).execute()
-            print(response)
-            print(len(response.data))

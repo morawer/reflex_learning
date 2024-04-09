@@ -11,7 +11,7 @@ class LoginState(State):
     email: str
     password: str
     users_info: list[User] = []
-    user_exist: bool
+    user_exist: bool = None
 
     def print_variables(self):
         print(self.email, self.password)
