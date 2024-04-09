@@ -51,5 +51,5 @@ class RegisterState(State):
     def update_password(self, password):
         self.password = password
 
-    async def make_user(self, email, password):
-        self.test = await create_user(email, password)
+    async def make_user(self, email, password, username):
+        self.test = await create_user(email, password, username)

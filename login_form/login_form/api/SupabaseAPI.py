@@ -46,7 +46,7 @@ class SupabaseAPI:
         else:
             return False
 
-    def insert_user(self, email, password):
+    def insert_user(self, email, password, username):
         response = self.supabase.table("login_table").insert(
-            {"email": email, "password": password}).execute()
+            {"email": email, "password": password, "username": username}).execute()
         print(response)
