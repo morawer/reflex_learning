@@ -29,19 +29,49 @@ def login():
             title="Password", icon="key-square", is_password=True,
             value=LoginState.password, update=LoginState.update_password,
         ),
-
-        render_submit_button(
-            name="Show a table of users", color="red", event=LoginState.query_all_users()
+        rx.dialog.root(
+            rx.dialog.trigger(
+                render_submit_button(
+                    name="Verify user", color="green", event=LoginState.query_single_user(LoginState.email, LoginState.password)
+                )
+            ),
+            rx.cond(
+                LoginState.user_exist,
+                rx.dialog.content(
+                    rx.dialog.title("EXISTEEEEEEE"),
+                    rx.dialog.description(
+                        "This is a dialog component. You can render anything you want in here.",
+                    ),
+                    rx.dialog.close(
+                        rx.button("Close Dialog", size="3"),
+                    ),
+                ),
+                rx.dialog.content(
+                    rx.dialog.title("NOOOOO EXISTEEEEEEE"),
+                    rx.dialog.description(
+                        "This is a dialog component. You can render anything you want in here.",
+                    ),
+                    rx.dialog.close(
+                        rx.button("Close Dialog", size="3"),
+                    ),
+                )
+            )
         ),
-        render_submit_button(
-            name="Delete table", color="blue", event=LoginState.delete_table()
-        ),
-        rx.cond(
-            LoginState.users_info is not None,
-            rx.container(
+        rx.dialog.root(
+            rx.dialog.trigger(
+                render_submit_button(
+                    name="Show a table of users", color="red", event=LoginState.query_all_users()
+                ),
+            ),
+            rx.dialog.content(
+                rx.dialog.title("Users"),
+                rx.dialog.description(
+                    "Database of users registered",
+                ),
                 rx.table.root(
                     rx.table.header(
                         rx.table.row(
+                            rx.table.column_header_cell("Username"),
                             rx.table.column_header_cell("Email"),
                             rx.table.column_header_cell("Password"),
                         ),
@@ -50,16 +80,25 @@ def login():
                         rx.foreach(
                             LoginState.users_info,
                             lambda item: rx.table.row(
+                                rx.table.cell(item.username),
                                 rx.table.cell(item.email),
                                 rx.table.cell(item.password),
                             ),
                         )
                     ),
                 ),
+                rx.dialog.close(
+                    rx.button("Close", size="2"),
+                )
+
             ),
         ),
 
-        *[rx.spacer() for _ in range(2)],
+        render_submit_button(
+            name="Delete table", color="blue", event=LoginState.delete_table()
+        ),
+
+        * [rx.spacer() for _ in range(2)],
         rx.text(
             "Don't have an account? Click ",
             rx.link("here", href="/register"),

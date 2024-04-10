@@ -28,6 +28,7 @@ class SupabaseAPI:
             for user in response.data:
                 users_data.append(
                     User(
+                        username=user["username"],
                         email=user["email"],
                         password=user["password"]
                     )
