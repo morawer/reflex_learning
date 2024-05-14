@@ -21,19 +21,23 @@ class SupabaseAPI:
         print(self.supabase)
 
     def query_all_users(self):
-        response = self.supabase.table("login_table").select("*").execute()
-        users_data = []
+        try:
+            response = self.supabase.table("login_table").select("*").execute()
+            users_data = []
 
-        if len(response.data) > 0:
-            for user in response.data:
-                users_data.append(
-                    User(
-                        username=user["username"],
-                        email=user["email"],
-                        password=user["password"]
+            if len(response.data) > 0:
+                for user in response.data:
+                    users_data.append(
+                        User(
+                            username=user["username"],
+                            email=user["email"],
+                            password=user["password"]
+                        )
                     )
-                )
-        return users_data
+            return users_data
+        except Exception as e:
+            print(f"Something went wrong: {e}")
+            return users_data
 
     def query_single_user(self, email, password):
         response = self.supabase.from_("login_table").select(
