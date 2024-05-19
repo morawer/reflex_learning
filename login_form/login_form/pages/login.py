@@ -25,42 +25,21 @@ def login():
             title="Email", icon="mail", is_password=False,
             value=LoginState.email, update=LoginState.update_email,
         ),
+        rx.cond(
+            LoginState.is_query_complete,
+            rx.cond(LoginState.user_exist,
+                    rx.text("This user exists in the system.",
+                            size="1", color="red"),
+                    rx.text("This user does not exist in the system.",
+                            size="1", color="red")
+                    )
+        ),
         render_input_field(
             title="Password", icon="key-square", is_password=True,
             value=LoginState.password, update=LoginState.update_password,
         ),
-        rx.dialog.root(
-            rx.dialog.trigger(
-                render_submit_button(
-                    name="Verify user", color="green", event=LoginState.query_single_user
-                )
-            ),
-            rx.cond(
-                LoginState.is_query_complete,
-                rx.cond(
-                    LoginState.user_exist,
-                    rx.dialog.content(
-                        rx.dialog.title("User Exists"),
-                        rx.dialog.description(
-                            "This user exists in the system.",
-                        ),
-                        rx.dialog.close(
-                            rx.button("Close Dialog", size="3"),
-                        ),
-                    ),
-                    rx.dialog.content(
-                        rx.dialog.title("User Not Found"),
-                        rx.dialog.description(
-                            "This user does not exist in the system.",
-                        ),
-                        rx.dialog.close(
-                            rx.button("Close Dialog", size="3"),
-                        ),
-                    )
-                )
-
-            )
-
+        render_submit_button(
+            name="Verify user", color="green", event=LoginState.query_single_user
         ),
         rx.dialog.root(
             rx.dialog.trigger(
