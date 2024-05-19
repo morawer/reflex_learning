@@ -36,26 +36,31 @@ def login():
                 )
             ),
             rx.cond(
-                LoginState.user_exist,
-                rx.dialog.content(
-                    rx.dialog.title("User Exists"),
-                    rx.dialog.description(
-                        "This user exists in the system.",
+                LoginState.is_query_complete,
+                rx.cond(
+                    LoginState.user_exist,
+                    rx.dialog.content(
+                        rx.dialog.title("User Exists"),
+                        rx.dialog.description(
+                            "This user exists in the system.",
+                        ),
+                        rx.dialog.close(
+                            rx.button("Close Dialog", size="3"),
+                        ),
                     ),
-                    rx.dialog.close(
-                        rx.button("Close Dialog", size="3"),
-                    ),
-                ),
-                rx.dialog.content(
-                    rx.dialog.title("User Not Found"),
-                    rx.dialog.description(
-                        "This user does not exist in the system.",
-                    ),
-                    rx.dialog.close(
-                        rx.button("Close Dialog", size="3"),
-                    ),
+                    rx.dialog.content(
+                        rx.dialog.title("User Not Found"),
+                        rx.dialog.description(
+                            "This user does not exist in the system.",
+                        ),
+                        rx.dialog.close(
+                            rx.button("Close Dialog", size="3"),
+                        ),
+                    )
                 )
+
             )
+
         ),
         rx.dialog.root(
             rx.dialog.trigger(
