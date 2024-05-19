@@ -27,11 +27,9 @@ class LoginState(State):
     async def query_all_users(self):
         self.users_info = await all_users()
 
-    async def query_single_user(self, email, password):
-        self.user_exist = await match_user(email, password)
-
-    async def make_user(self, email, password):
-        self.test = await create_user(email, password)
+    async def query_single_user(self):
+        self.user_exist = await match_user(self.email, self.password)
+        print("User exists:", self.user_exist)
 
     def delete_table(self):
         self.users_info = []
@@ -51,5 +49,5 @@ class RegisterState(State):
     def update_password(self, password):
         self.password = password
 
-    async def make_user(self, email, password, username):
-        self.test = await create_user(email, password, username)
+    async def make_user(self):
+        self.test = await create_user(self.email, self.password)
